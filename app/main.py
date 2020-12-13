@@ -9,6 +9,10 @@ app = FastAPI()
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+    
+@app.get("/github_actions")
+def read_root():
+    return {"Hello": "github_actions!"}
 
 
 @app.get("/items/{item_id}")
