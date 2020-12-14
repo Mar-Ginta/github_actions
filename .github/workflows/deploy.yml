@@ -19,6 +19,7 @@ jobs:
         password: ${{ secrets.CLOUD_PASSWORD }}
         port: 22
         script: |
+          echo $REPO_URI
           docker pull $REPO_URI:$TAG_NAME
           docker rm $CONTAINER_NAME
           docker run -d --name $REPO_URI:$TAG_NAM -p 8000:8080 blog
