@@ -1,0 +1,23 @@
+name: Publish Docker image
+on:
+  release:
+    types: [published]
+jobs:
+  deploy_to_aliyun:
+    name: executing remote ssh commands using password
+    steps:
+    - name: deploy
+      env:
+        TAG_NAME: latest
+        CONTAINER_NAME: blog
+        REPO_URI: ginta007/github-actions
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.CLOUD_USERNAME }}
+        password: ${{ secrets.CLOUD_PASSWORD }}
+        port: 22
+        script: |
+          docker pull $REPO_URI:$TAG_NAME
+          docker rm $CONTAINER_NAME
+          docker run -d --name $REPO_URI:$TAG_NAM -p 8000:8080 blog
