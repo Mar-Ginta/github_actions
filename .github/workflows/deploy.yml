@@ -5,6 +5,7 @@ on:
 jobs:
   deploy_to_aliyun:
     name: executing remote ssh commands using password
+    runs-on: ubuntu-latest
     steps:
     - name: deploy
       env:
